@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Swords, Trophy, Users, User, Home, Code2 } from "lucide-react";
+import { Swords, Trophy, Users, User, Home, Code2, BookOpen, Calendar, Settings, HelpCircle } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -13,12 +13,19 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const items = [
+const playItems = [
   { title: "Dashboard", url: "/", icon: Home },
   { title: "Battle Arena", url: "/arena", icon: Swords },
-  { title: "Leaderboard", url: "/leaderboard", icon: Trophy },
+  { title: "Tournaments", url: "/tournaments", icon: Calendar },
+  { title: "Practice", url: "/practice", icon: BookOpen },
   { title: "Friends", url: "/friends", icon: Users },
+];
+
+const youItems = [
+  { title: "Leaderboard", url: "/leaderboard", icon: Trophy },
   { title: "Profile", url: "/profile", icon: User },
+  { title: "Settings", url: "/settings", icon: Settings },
+  { title: "How it Works", url: "/how-it-works", icon: HelpCircle },
 ];
 
 export function AppSidebar() {
@@ -42,26 +49,31 @@ export function AppSidebar() {
         </Link>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Menu</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => {
-                const active = currentPath === item.url;
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={active}>
-                      <Link to={item.url} className="flex items-center gap-3">
-                        <item.icon className="h-4 w-4" />
-                        {!collapsed && <span>{item.title}</span>}
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {[
+          { label: "Play", items: playItems },
+          { label: "You", items: youItems },
+        ].map((group) => (
+          <SidebarGroup key={group.label}>
+            <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {group.items.map((item) => {
+                  const active = currentPath === item.url;
+                  return (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton asChild isActive={active}>
+                        <Link to={item.url} className="flex items-center gap-3">
+                          <item.icon className="h-4 w-4" />
+                          {!collapsed && <span>{item.title}</span>}
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ))}
       </SidebarContent>
     </Sidebar>
   );
