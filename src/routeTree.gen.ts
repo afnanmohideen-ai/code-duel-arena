@@ -9,20 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TournamentsRouteImport } from './routes/tournaments'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PracticeRouteImport } from './routes/practice'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as FriendsRouteImport } from './routes/friends'
 import { Route as ArenaRouteImport } from './routes/arena'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TournamentsRoute = TournamentsRouteImport.update({
+  id: '/tournaments',
+  path: '/tournaments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PracticeRoute = PracticeRouteImport.update({
+  id: '/practice',
+  path: '/practice',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeaderboardRoute = LeaderboardRouteImport.update({
   id: '/leaderboard',
   path: '/leaderboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FriendsRoute = FriendsRouteImport.update({
@@ -45,42 +75,107 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/arena': typeof ArenaRoute
   '/friends': typeof FriendsRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/leaderboard': typeof LeaderboardRoute
+  '/login': typeof LoginRoute
+  '/practice': typeof PracticeRoute
   '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
+  '/tournaments': typeof TournamentsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/arena': typeof ArenaRoute
   '/friends': typeof FriendsRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/leaderboard': typeof LeaderboardRoute
+  '/login': typeof LoginRoute
+  '/practice': typeof PracticeRoute
   '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
+  '/tournaments': typeof TournamentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/arena': typeof ArenaRoute
   '/friends': typeof FriendsRoute
+  '/how-it-works': typeof HowItWorksRoute
   '/leaderboard': typeof LeaderboardRoute
+  '/login': typeof LoginRoute
+  '/practice': typeof PracticeRoute
   '/profile': typeof ProfileRoute
+  '/settings': typeof SettingsRoute
+  '/tournaments': typeof TournamentsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/arena' | '/friends' | '/leaderboard' | '/profile'
+  fullPaths:
+    | '/'
+    | '/arena'
+    | '/friends'
+    | '/how-it-works'
+    | '/leaderboard'
+    | '/login'
+    | '/practice'
+    | '/profile'
+    | '/settings'
+    | '/tournaments'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/arena' | '/friends' | '/leaderboard' | '/profile'
-  id: '__root__' | '/' | '/arena' | '/friends' | '/leaderboard' | '/profile'
+  to:
+    | '/'
+    | '/arena'
+    | '/friends'
+    | '/how-it-works'
+    | '/leaderboard'
+    | '/login'
+    | '/practice'
+    | '/profile'
+    | '/settings'
+    | '/tournaments'
+  id:
+    | '__root__'
+    | '/'
+    | '/arena'
+    | '/friends'
+    | '/how-it-works'
+    | '/leaderboard'
+    | '/login'
+    | '/practice'
+    | '/profile'
+    | '/settings'
+    | '/tournaments'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ArenaRoute: typeof ArenaRoute
   FriendsRoute: typeof FriendsRoute
+  HowItWorksRoute: typeof HowItWorksRoute
   LeaderboardRoute: typeof LeaderboardRoute
+  LoginRoute: typeof LoginRoute
+  PracticeRoute: typeof PracticeRoute
   ProfileRoute: typeof ProfileRoute
+  SettingsRoute: typeof SettingsRoute
+  TournamentsRoute: typeof TournamentsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tournaments': {
+      id: '/tournaments'
+      path: '/tournaments'
+      fullPath: '/tournaments'
+      preLoaderRoute: typeof TournamentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -88,11 +183,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/practice': {
+      id: '/practice'
+      path: '/practice'
+      fullPath: '/practice'
+      preLoaderRoute: typeof PracticeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leaderboard': {
       id: '/leaderboard'
       path: '/leaderboard'
       fullPath: '/leaderboard'
       preLoaderRoute: typeof LeaderboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/friends': {
@@ -123,8 +239,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ArenaRoute: ArenaRoute,
   FriendsRoute: FriendsRoute,
+  HowItWorksRoute: HowItWorksRoute,
   LeaderboardRoute: LeaderboardRoute,
+  LoginRoute: LoginRoute,
+  PracticeRoute: PracticeRoute,
   ProfileRoute: ProfileRoute,
+  SettingsRoute: SettingsRoute,
+  TournamentsRoute: TournamentsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
